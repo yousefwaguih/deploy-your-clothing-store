@@ -1,0 +1,12 @@
+
+{
+  "name": "clothing-store",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "echo 'static'",
+    "start": "npx serve ."
+  },
+  "dependencies": {
+    "serve": "^14.0.0"
+  }
+}
