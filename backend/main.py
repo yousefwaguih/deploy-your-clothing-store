@@ -1,11 +1,14 @@
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from sqlalchemy import Column, Integer, String, Float, ForeignKey, DateTime, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session, relationship
 from typing import List
 from pydantic import BaseModel
 from datetime import datetime
+import os
 
 # Database Setup
 SQLALCHEMY_DATABASE_URL = "sqlite:///./clothing_store.db"
@@ -155,11 +158,9 @@ def delete_product(product_id: int, db: Session = Depends(get_db)):
 def health_check():
     return {"status": "healthy"}
 
-# Root endpoint
-@app.get("/")
-def root():
-    return {"message": "Welcome to Clothing Store API"}
+# !! لازم يكون الـ mount في الآخر بعد كل الـ endpoints !!
+app.mount("/", StaticFiles(directory="frontend", html=True), name="static")
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8001)
+    uvicorn.run(app, host="0.0.0.0", port=8000)

@@ -2,10 +2,7 @@
   "name": "clothing-store",
   "version": "1.0.0",
   "scripts": {
-    "build": "echo 'static'",
-    "start": "node server.js"
-  },
-  "dependencies": {
-    "serve": "^14.0.0"
+    "build": "pip install -r backend/requirements.txt",
+    "start": "uvicorn backend.main:app --host 0.0.0.0 --port $PORT"
   }
 }
